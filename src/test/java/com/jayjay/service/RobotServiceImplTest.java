@@ -22,4 +22,12 @@ public class RobotServiceImplTest {
         robotService.place(3,1, Direction.NORTH);
         assertEquals(robotService.report(), "3,1,NORTH");
     }
+
+    @Test
+    public void shouldNotPlaceRobotOutsideArea() {
+        robotService.place(-1,2,Direction.SOUTH);
+        assertEquals(robotService.report(), "Robot is not yet placed.");
+        robotService.place(3,5,Direction.NORTH);
+        assertEquals(robotService.report(), "Robot is not yet placed.");
+    }
 }

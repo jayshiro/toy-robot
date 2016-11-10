@@ -5,6 +5,8 @@ import com.jayjay.model.ToyRobot;
 
 public class RobotServiceImpl implements RobotService{
 
+    private static final String MSG_ROBOT_NOT_PLACED = "Robot is not yet placed.";
+
     private ToyRobot robot;
 
     public RobotServiceImpl(ToyRobot robot) {
@@ -17,11 +19,16 @@ public class RobotServiceImpl implements RobotService{
             robot.setX(newX);
             robot.setY(newY);
             robot.setDirection(newDirection);
+            robot.setPlaced(true);
         }
     }
 
     @Override
     public void move() {
+        if(!robot.isPlaced()) {
+            return;
+        }
+
         switch (robot.getDirection()) {
             case NORTH:
                 if(!willFallOver(robot.getX(),robot.getY()+1)) {
@@ -48,6 +55,10 @@ public class RobotServiceImpl implements RobotService{
 
     @Override
     public void left() {
+        if(!robot.isPlaced()) {
+            return;
+        }
+
         switch (robot.getDirection()) {
             case NORTH:
                 robot.setDirection(Direction.WEST);
@@ -66,6 +77,10 @@ public class RobotServiceImpl implements RobotService{
 
     @Override
     public void right() {
+        if(!robot.isPlaced()) {
+            return;
+        }
+
         switch (robot.getDirection()) {
             case NORTH:
                 robot.setDirection(Direction.EAST);
@@ -84,7 +99,7 @@ public class RobotServiceImpl implements RobotService{
 
     @Override
     public String report() {
-        return robot.toString();
+        return robot.isPlaced() ? robot.toString() : MSG_ROBOT_NOT_PLACED;
     }
 
     private boolean willFallOver(int newX, int newY) {

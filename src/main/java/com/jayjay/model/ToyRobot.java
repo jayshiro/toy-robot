@@ -4,6 +4,7 @@ public class ToyRobot {
     private int x;
     private int y;
     private Direction direction;
+    private boolean isPlaced;
 
     public int getX() {
         return x;
@@ -39,5 +40,13 @@ public class ToyRobot {
 
     public String toString() {
         return x + "," + y + "," + direction.name();
+    }
+
+    public boolean isPlaced() {
+        return isPlaced;
+    }
+
+    public void setPlaced(boolean isPlaced) {
+        this.isPlaced = isPlaced;
     }
 }
