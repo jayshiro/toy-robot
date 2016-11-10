@@ -13,7 +13,7 @@ Example input and corresponding results
 ### Example a
 
     PLACE 5,5,EAST
-	REPORT
+REPORT
 
 Expected output:
 
@@ -22,10 +22,10 @@ Expected output:
 ### Example b
 
     MOVE
-	LEFT
-	RIGHT
-	MOVE
-	REPORT
+LEFT
+RIGHT
+MOVE
+REPORT
 
 Expected output:
 
@@ -47,9 +47,9 @@ Expected output
 ### Example d
 
     PLACE 1,2,EAST
-	MOVE
-	PLACE 4,2,WEST
-	REPORT
+MOVE
+PLACE 4,2,WEST
+REPORT
 
 Expected output
 
