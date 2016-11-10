@@ -30,4 +30,57 @@ public class RobotServiceImplTest {
         robotService.place(3,5,Direction.NORTH);
         assertEquals(robotService.report(), "Robot is not yet placed.");
     }
+
+    @Test
+    public void shouldNotAllowRobotMovementsWhenNotYetPlaced() {
+        robotService.move();
+        robotService.left();
+        robotService.move();
+        assertEquals(robotService.report(), "Robot is not yet placed.");
+    }
+
+    @Test
+    public void shouldMoveRobotProperly() {
+        robotService.place(4,4,Direction.SOUTH);
+        robotService.move();
+        assertEquals(robotService.report(), "4,3,SOUTH");
+    }
+
+    @Test
+    public void shouldChangeDirectionsProperly() {
+        robotService.place(2,2,Direction.WEST);
+        robotService.left();
+        assertEquals(robotService.report(), "2,2,SOUTH");
+        robotService.right();
+        assertEquals(robotService.report(), "2,2,WEST");
+    }
+
+    @Test
+    public void shouldMoveProperlyAfterChangingDirections() {
+        robotService.place(1,1,Direction.EAST);
+        robotService.right();
+        robotService.move();
+        assertEquals(robotService.report(), "1,0,SOUTH");
+        robotService.left();
+        robotService.move();
+        assertEquals(robotService.report(), "2,0,EAST");
+    }
+
+    @Test
+    public void shouldBeAbleToPlaceMoreThanOnce() {
+        robotService.place(0,0,Direction.WEST);
+        assertEquals(robotService.report(), "0,0,WEST");
+        robotService.place(3,4,Direction.SOUTH);
+        assertEquals(robotService.report(), "3,4,SOUTH");
+    }
+
+    @Test
+    public void shouldNotMovePastArea() {
+        robotService.place(1,3,Direction.EAST);
+        robotService.left();
+        robotService.move();
+        robotService.move();
+        robotService.move();
+        assertEquals(robotService.report(), "1,4,NORTH");
+    }
 }
