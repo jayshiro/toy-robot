@@ -99,7 +99,9 @@ public class RobotServiceImpl implements RobotService{
 
     @Override
     public String report() {
-        return robot.isPlaced() ? robot.toString() : MSG_ROBOT_NOT_PLACED;
+        String output = robot.isPlaced() ? robot.toString() : MSG_ROBOT_NOT_PLACED;
+        System.out.println(output);
+        return output;
     }
 
     private boolean willFallOver(int newX, int newY) {

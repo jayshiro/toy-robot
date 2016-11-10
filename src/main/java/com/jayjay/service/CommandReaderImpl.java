@@ -58,7 +58,31 @@ public class CommandReaderImpl implements CommandReader{
     }
 
     @Override
-    public void handle(String command) {
+    public void handle(String input) {
 
+        if(isValid(input)) {
+            String[] commandArr = input.split(" ");
+            Command command = Command.findByName(commandArr[0]);
+
+            switch (command) {
+                case PLACE:
+                    String[] paramsArr = commandArr[1].split(",");
+                    robotService.place(Integer.parseInt(paramsArr[0]), Integer.parseInt(paramsArr[1]),
+                            Direction.findByName(paramsArr[2]));
+                    break;
+                case LEFT:
+                    robotService.left();
+                    break;
+                case RIGHT:
+                    robotService.right();
+                    break;
+                case MOVE:
+                    robotService.move();
+                    break;
+                case REPORT:
+                    robotService.report();
+                    break;
+            }
+        }
     }
 }
